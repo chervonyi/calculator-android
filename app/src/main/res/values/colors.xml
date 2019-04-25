@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- MAIN -->
+    <color name="darkBackground">#414145</color>
+    <color name="colorAccentCyan">#80E6F0</color>
+    <color name="colorAccentYellow">#E8FFB2</color>
+    <color name="resultColor">#FFF</color>
+    <color name="lightGray">#C5C3C3</color>
+    <color name="fontMemory">#625E5E</color>
+    <color name="numbers">#FFF</color>
+
+    <!-- OTHERS -->
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
