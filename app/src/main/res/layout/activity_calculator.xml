@@ -331,12 +331,14 @@
                        android:layout_width="0dp"
                        android:layout_height="match_parent"
                        android:layout_weight="4"
+                       android:gravity="center"
                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="4"
+                            android:background="@color/darkBackground"
                             android:orientation="horizontal">
 
                             <!-- LEFT COLUMN -->
@@ -349,7 +351,7 @@
 
                                 <Button
                                     android:id="@+id/button_percent"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textSize="25sp"
                                     android:layout_margin="8dp"
@@ -359,7 +361,7 @@
 
                                 <Button
                                     android:id="@+id/button_plus"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textSize="25sp"
                                     android:layout_margin="8dp"
@@ -378,7 +380,7 @@
 
                                 <Button
                                     android:id="@+id/button_multiplication"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textSize="25sp"
                                     android:layout_margin="8dp"
@@ -388,7 +390,7 @@
 
                                 <Button
                                     android:id="@+id/button_division"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textSize="25sp"
                                     android:layout_margin="8dp"
@@ -398,7 +400,7 @@
 
                                 <Button
                                     android:id="@+id/button_subtraction"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:textSize="25sp"
                                     android:layout_margin="8dp"
