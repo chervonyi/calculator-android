@@ -70,7 +70,61 @@ public class CalculatorActivity extends AppCompatActivity {
                 buttonPlus.requestLayout();
             }
         });
+
+
+        String pattern = "memory_";
+        TextView memorySlot;
+        for (int i = 0; i < 4; i++) {
+            memorySlot = findViewById(getResources().getIdentifier(pattern + i,
+                    "id", getPackageName()));
+
+            memorySlot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TextView slot = (TextView) v;
+
+                    if (slot.getText().equals("+")) {
+                        if (setMemory(v)) {
+                            resultView.setText("");
+                            inputView.setText("");
+                        }
+                    } else {
+                        if (isLastEquals("+-*/(") || inputView.getText().length() == 0) {
+                            appendInput(slot.getText().toString());
+                            preCalculation();
+                        }
+                    }
+                }
+            });
+
+            memorySlot.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    if (setMemory(v)) {
+                        resultView.setText("");
+                        inputView.setText("");
+                    }
+
+                    return true;
+                }
+            });
+        }
+
     }
+
+    private boolean setMemory(View view) {
+        try {
+            double result = calculator.calculate(inputView.getText().toString());
+            TextView memorySlot = (TextView) view;
+            memorySlot.setText(decimalFormat.format(result));
+            return true;
+        } catch (CalculatorSyntaxException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     public void onClickNumber(View view) {
         String fullName = getResources().getResourceName(view.getId());
@@ -101,7 +155,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
         } catch (CalculatorSyntaxException exp) {
             Log.d("CHR_GAMES_TEST", "EXCEPTION");
-            resultView.setText(" ");
+            resultView.setText("");
         }
 
     }
@@ -117,11 +171,20 @@ public class CalculatorActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isLastOperator() {
-        return "+-*/%".contains(String.valueOf(inputView.getText().charAt(inputView.getText().length() - 1)));
+    private boolean isLastEquals(String set) {
+
+        String input = inputView.getText().toString();
+
+        if (input.length() == 0) {
+            return false;
+        }
+
+        return set.contains(String.valueOf(input.charAt(input.length() - 1)));
     }
 
     public void onClickOperatingButton(View view) {
+
+        resultView.setText("");
 
         switch (view.getId()) {
             case R.id.button_division:          appendInput("/"); break;
@@ -153,7 +216,7 @@ public class CalculatorActivity extends AppCompatActivity {
         }
 
         // Replace last character (operator) with a new one
-        else if (isLastOperator() && "+-*/%".contains(str)) {
+        else if (isLastEquals("+-*/%") && "+-*/%".contains(str)) {
             input = input.substring(0, input.length() - 1);
         }
 

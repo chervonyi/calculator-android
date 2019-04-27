@@ -29,7 +29,8 @@
                 android:textColor="@color/fontMemory"
                 android:textAlignment="center"
                 android:textSize="30sp"
-                android:text="+"/>
+                android:text="+"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/memory_1"
@@ -39,7 +40,8 @@
                 android:textColor="@color/fontMemory"
                 android:textAlignment="center"
                 android:textSize="30sp"
-                android:text="+"/>
+                android:text="+"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/memory_2"
@@ -49,7 +51,8 @@
                 android:textColor="@color/fontMemory"
                 android:textAlignment="center"
                 android:textSize="30sp"
-                android:text="+"/>
+                android:text="+"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/memory_3"
@@ -59,7 +62,8 @@
                 android:textColor="@color/fontMemory"
                 android:textAlignment="center"
                 android:textSize="30sp"
-                android:text="+"/>
+                android:text="+"
+                android:clickable="true"/>
 
         </LinearLayout>
 
