@@ -81,22 +81,21 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:paddingRight="30dp"
+                   android:text="0"
                    android:textAlignment="viewEnd"
                    android:textColor="@color/resultColor"
                    android:textSize="60sp"
-                   android:text="75"
-                   tools:ignore="RtlHardcoded,RtlSymmetry"/>
+                   tools:ignore="RtlHardcoded,RtlSymmetry" />
 
                <TextView
                    android:id="@+id/textViewInput"
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:paddingRight="30dp"
                    android:layout_marginTop="30dp"
+                   android:paddingRight="30dp"
                    android:textAlignment="viewEnd"
                    android:textColor="@color/lightGray"
                    android:textSize="30sp"
-                   android:text="24+3x17"
                    tools:ignore="RtlHardcoded,RtlSymmetry" />
            </LinearLayout>
 
@@ -439,7 +438,7 @@
                            android:textColor="@color/darkBackground"
                            android:background="@drawable/button_operation_yellow"
                            android:text="="
-                           android:onClick="onClickOperatingButton"/>
+                           android:onClick="onClickCalculate"/>
                    </LinearLayout>
 
                </LinearLayout>

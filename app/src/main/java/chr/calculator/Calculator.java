@@ -1,5 +1,7 @@
 package chr.calculator;
 
+import android.util.Log;
+
 public class Calculator {
 
     private final char DELIMITER = '.';
@@ -73,6 +75,7 @@ public class Calculator {
                     default: tmpResult = 0;
                 }
             } catch (NumberFormatException e) {
+                int a = 2;
                 throw new CalculatorSyntaxException(CalculatorSyntaxException.BAD_SYNTAX);
             }
         }
@@ -114,6 +117,7 @@ public class Calculator {
     private void level_5() throws CalculatorSyntaxException {
 
         if (source.length() == 0) {
+            // TODO - Anyway, I can paste operator = new Lexem() to fix bug
             return;
         }
 
@@ -161,7 +165,6 @@ public class Calculator {
         // Read number
         if (Character.isDigit(source.charAt(0))) {
             boolean foundDelimiter = false;
-
             StringBuilder num = new StringBuilder();
 
             while (Character.isDigit(source.charAt(0)) ||
@@ -189,6 +192,12 @@ public class Calculator {
         if ("+-*/%".contains(String.valueOf(source.charAt(0)))) {
             String operator = String.valueOf(source.charAt(0));
             popElement();
+
+            // Check if it was a last character (Last character is an operator = Bad syntax)
+            if (source.length() == 0) {
+                throw new CalculatorSyntaxException(CalculatorSyntaxException.BAD_SYNTAX);
+            }
+
             return new Lexem(operator, Lexem.OPERATOR);
         }
 

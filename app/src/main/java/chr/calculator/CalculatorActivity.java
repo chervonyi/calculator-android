@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 public class CalculatorActivity extends AppCompatActivity {
 
     // UI
@@ -21,6 +23,7 @@ public class CalculatorActivity extends AppCompatActivity {
     private TextView inputView;
 
     private Calculator calculator = new Calculator();
+    private DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,8 @@ public class CalculatorActivity extends AppCompatActivity {
         String num = fullName.substring(fullName.lastIndexOf("_") + 1);
 
         appendInput(num);
+
+        preCalculation();
     }
 
     public void onClickErase(View view) {
@@ -83,7 +88,37 @@ public class CalculatorActivity extends AppCompatActivity {
         if (input.length() > 0) {
             input = input.substring(0, input.length() - 1);
             inputView.setText(input);
+
+            preCalculation();
         }
+    }
+
+    private void preCalculation() {
+        try {
+            double result = calculator.calculate(inputView.getText().toString());
+
+            resultView.setText(decimalFormat.format(result));
+
+        } catch (CalculatorSyntaxException exp) {
+            Log.d("CHR_GAMES_TEST", "EXCEPTION");
+            resultView.setText(" ");
+        }
+
+    }
+
+    public void onClickCalculate(View view) {
+        try {
+            double result = calculator.calculate(inputView.getText().toString());
+            inputView.setText(decimalFormat.format(result));
+            resultView.setText("");
+        } catch (CalculatorSyntaxException e) {
+            inputView.setText("");
+            resultView.setText(R.string.bad_syntax);
+        }
+    }
+
+    private boolean isLastOperator() {
+        return "+-*/%".contains(String.valueOf(inputView.getText().charAt(inputView.getText().length() - 1)));
     }
 
     public void onClickOperatingButton(View view) {
@@ -97,11 +132,31 @@ public class CalculatorActivity extends AppCompatActivity {
             case R.id.button_subtraction:       appendInput("-"); break;
             case R.id.buttonCloseBrackets:      appendInput(")"); break;
             case R.id.buttonOpenBrackets:       appendInput("("); break;
-            case R.id.button_result:            //calculator.calculate(inputView.getText().toString());
         }
+
+        //preCalculation();
     }
 
     private void appendInput(String str) {
-        inputView.setText(inputView.getText() + str);
+
+        String input = inputView.getText().toString();
+
+        if (input.length() == 0) {
+            // Put '0' before point to make input string like: "0."
+            if (str.equals(".")) {
+                input = "0";
+            }
+            // One of these character cannot be the first one in the input string
+            if ("+-*/%)".contains(str)) {
+                return;
+            }
+        }
+
+        // Replace last character (operator) with a new one
+        else if (isLastOperator() && "+-*/%".contains(str)) {
+            input = input.substring(0, input.length() - 1);
+        }
+
+        inputView.setText(input + str);
     }
 }
