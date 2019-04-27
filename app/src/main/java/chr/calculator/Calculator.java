@@ -75,8 +75,11 @@ public class Calculator {
                     default: tmpResult = 0;
                 }
             } catch (NumberFormatException e) {
-                int a = 2;
                 throw new CalculatorSyntaxException(CalculatorSyntaxException.BAD_SYNTAX);
+            }
+
+            if (Double.isInfinite(tmpResult) || Double.isNaN(tmpResult)) {
+                throw new CalculatorSyntaxException(CalculatorSyntaxException.BAD_EXPRESSION);
             }
         }
 
@@ -117,7 +120,6 @@ public class Calculator {
     private void level_5() throws CalculatorSyntaxException {
 
         if (source.length() == 0) {
-            // TODO - Anyway, I can paste operator = new Lexem() to fix bug
             return;
         }
 

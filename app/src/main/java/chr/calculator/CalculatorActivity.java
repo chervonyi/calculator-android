@@ -208,7 +208,7 @@ public class CalculatorActivity extends AppCompatActivity {
             resultView.setText("");
         } catch (CalculatorSyntaxException e) {
             inputView.setText("");
-            resultView.setText(R.string.bad_syntax);
+            resultView.setText(e.toString());
         }
     }
 
