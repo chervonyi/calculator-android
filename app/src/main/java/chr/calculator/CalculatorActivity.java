@@ -117,7 +117,7 @@ public class CalculatorActivity extends AppCompatActivity {
                             inputView.setText("");
                         }
                     } else {
-                        if (isLastEquals(inputView.getText().toString(),"+-*/(") || inputView.getText().length() == 0) {
+                        if (isLastEquals(inputView.getText().toString(),"+−×÷(") || inputView.getText().length() == 0) {
                             appendInput(slot.getText().toString());
                             preCalculation();
                         }
@@ -160,7 +160,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private boolean setMemory(View view) {
         try {
-            double result = calculator.calculate(inputView.getText().toString());
+            double result = calculator.calculate(convertString(inputView.getText().toString()));
             TextView memorySlot = (TextView) view;
             memorySlot.setText(decimalFormat.format(result));
             return true;
@@ -193,7 +193,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private void preCalculation() {
         try {
-            double result = calculator.calculate(inputView.getText().toString());
+            double result = calculator.calculate(convertString(inputView.getText().toString()));
             resultView.setText(decimalFormat.format(result));
 
         } catch (CalculatorSyntaxException exp) {
@@ -203,7 +203,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
     public void onClickCalculate(View view) {
         try {
-            double result = calculator.calculate(inputView.getText().toString());
+            double result = calculator.calculate(convertString(inputView.getText().toString()));
             inputView.setText(decimalFormat.format(result));
             resultView.setText("");
         } catch (CalculatorSyntaxException e) {
@@ -224,12 +224,12 @@ public class CalculatorActivity extends AppCompatActivity {
     public void onClickOperatingButton(View view) {
 
         switch (view.getId()) {
-            case R.id.button_division:          appendInput("/"); break;
-            case R.id.button_multiplication:    appendInput("*"); break;
+            case R.id.button_division:          appendInput("÷"); break;
+            case R.id.button_multiplication:    appendInput("×"); break;
             case R.id.button_percent:           appendInput("%"); break;
             case R.id.button_plus:              appendInput("+"); break;
             case R.id.button_point:             appendInput("."); break;
-            case R.id.button_subtraction:       appendInput("-"); break;
+            case R.id.button_subtraction:       appendInput("−"); break;
             case R.id.buttonCloseBrackets:      appendInput(")"); break;
             case R.id.buttonOpenBrackets:       appendInput("("); break;
         }
@@ -243,7 +243,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
         if (input.length() == 0) {
             // One of these character cannot be the first one in the input string
-            if ("+-*/%)".contains(str)) {
+            if ("+−×÷%)".contains(str)) {
                 return;
             }
         }
@@ -251,7 +251,7 @@ public class CalculatorActivity extends AppCompatActivity {
         // Check if pointer does not make error
         if (str.equals(".")) {
             // Put '0' before point to make input string like: "0."
-            if (isLastEquals(input, "+-*/%(") || input.length() == 0) {
+            if (isLastEquals(input, "+−×÷%(") || input.length() == 0) {
                 input += "0";
             }
 
@@ -260,8 +260,8 @@ public class CalculatorActivity extends AppCompatActivity {
             }
         }
 
-        if ("+-*/%".contains(str)) {
-            if (isLastEquals(input, "+-*/%")) {
+        if ("+−×÷%".contains(str)) {
+            if (isLastEquals(input, "+−×÷%")) {
                 input = input.substring(0, input.length() - 1);
             } else if (isLastEquals(input, ".")) {
                 return;
@@ -273,27 +273,16 @@ public class CalculatorActivity extends AppCompatActivity {
             if (input.length() == 0) {
                 inputView.setText(input + str);
                 return;
-            } else if (!isLastEquals(input, "+-*/%(")) {
+            } else if (!isLastEquals(input, "+−×÷%(")) {
                 return;
             }
         } else if (str.equals(")")) {
-            if (isLastEquals(input, "+-*/%.(") || count(input, ")") >= count(input,"(")) {
+            if (isLastEquals(input, "+−×÷%.(") || count(input, ")") >= count(input,"(")) {
                 return;
             }
         }
 
         inputView.setText(input + str);
-    }
-
-    private boolean checkSyntaxWith(String inputToCheck) {
-
-        try {
-            calculator.calculate(inputToCheck);
-            return true;
-        } catch (CalculatorSyntaxException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     private boolean isLastNumberWell() {
@@ -311,5 +300,12 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private int count(String stringToCheck, String symbol) {
         return stringToCheck.length() - stringToCheck.replaceAll(String.format("\\%s", symbol),"").length();
+    }
+
+    private String convertString(String str) {
+        str = str.replaceAll("\\×", "*");
+        str = str.replaceAll("\\−", "-");
+        str = str.replaceAll("\\÷", "/");
+        return str;
     }
 }

@@ -11,5 +11,4 @@
         <item name="colorPrimaryDark">@color/darkBackground</item>
         <item name="colorAccent">@color/colorAccentYellow</item>
     </style>
-
 </resources>

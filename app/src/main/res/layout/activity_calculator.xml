@@ -403,7 +403,7 @@
                                     android:layout_margin="8dp"
                                     android:textColor="@color/darkBackground"
                                     android:background="@drawable/button_operation_cyan"
-                                    android:text="x"
+                                    android:text="×"
                                     android:onClick="onClickOperatingButton"/>
 
                                 <Button
@@ -414,7 +414,7 @@
                                     android:layout_margin="8dp"
                                     android:textColor="@color/darkBackground"
                                     android:background="@drawable/button_operation_cyan"
-                                    android:text="/"
+                                    android:text="÷"
                                     android:onClick="onClickOperatingButton"/>
 
                                 <Button
@@ -425,7 +425,7 @@
                                     android:layout_margin="8dp"
                                     android:textColor="@color/darkBackground"
                                     android:background="@drawable/button_operation_cyan"
-                                    android:text="-"
+                                    android:text="−"
                                     android:onClick="onClickOperatingButton"/>
                             </LinearLayout>
 
