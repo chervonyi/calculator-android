@@ -89,7 +89,7 @@ public class CalculatorActivity extends AppCompatActivity {
                             inputView.setText("");
                         }
                     } else {
-                        if (isLastEquals("+-*/(") || inputView.getText().length() == 0) {
+                        if (isLastEquals(inputView.getText().toString(),"+-*/(") || inputView.getText().length() == 0) {
                             appendInput(slot.getText().toString());
                             preCalculation();
                         }
@@ -150,14 +150,11 @@ public class CalculatorActivity extends AppCompatActivity {
     private void preCalculation() {
         try {
             double result = calculator.calculate(inputView.getText().toString());
-
             resultView.setText(decimalFormat.format(result));
 
         } catch (CalculatorSyntaxException exp) {
-            Log.d("CHR_GAMES_TEST", "EXCEPTION");
             resultView.setText("");
         }
-
     }
 
     public void onClickCalculate(View view) {
@@ -171,20 +168,16 @@ public class CalculatorActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isLastEquals(String set) {
+    private boolean isLastEquals(String stringToCheck, String set) {
 
-        String input = inputView.getText().toString();
-
-        if (input.length() == 0) {
+        if (stringToCheck.length() == 0) {
             return false;
         }
 
-        return set.contains(String.valueOf(input.charAt(input.length() - 1)));
+        return set.contains(String.valueOf(stringToCheck.charAt(stringToCheck.length() - 1)));
     }
 
     public void onClickOperatingButton(View view) {
-
-        resultView.setText("");
 
         switch (view.getId()) {
             case R.id.button_division:          appendInput("/"); break;
@@ -197,7 +190,7 @@ public class CalculatorActivity extends AppCompatActivity {
             case R.id.buttonOpenBrackets:       appendInput("("); break;
         }
 
-        //preCalculation();
+        preCalculation();
     }
 
     private void appendInput(String str) {
@@ -205,21 +198,74 @@ public class CalculatorActivity extends AppCompatActivity {
         String input = inputView.getText().toString();
 
         if (input.length() == 0) {
-            // Put '0' before point to make input string like: "0."
-            if (str.equals(".")) {
-                input = "0";
-            }
             // One of these character cannot be the first one in the input string
             if ("+-*/%)".contains(str)) {
                 return;
             }
         }
 
-        // Replace last character (operator) with a new one
-        else if (isLastEquals("+-*/%") && "+-*/%".contains(str)) {
-            input = input.substring(0, input.length() - 1);
+        // Check if pointer does not make error
+        if (str.equals(".")) {
+            // Put '0' before point to make input string like: "0."
+            if (isLastEquals(input, "+-*/%(") || input.length() == 0) {
+                input += "0";
+            }
+
+            else if (!isLastNumberWell() || isLastEquals(input, ")")) {
+                return;
+            }
+        }
+
+        if ("+-*/%".contains(str)) {
+            if (isLastEquals(input, "+-*/%")) {
+                input = input.substring(0, input.length() - 1);
+            } else if (isLastEquals(input, ".")) {
+                return;
+            }
+        }
+
+        // Conditions for brackets
+        if (str.equals("(")) {
+            if (input.length() == 0) {
+                inputView.setText(input + str);
+                return;
+            } else if (!isLastEquals(input, "+-*/%(")) {
+                return;
+            }
+        } else if (str.equals(")")) {
+            if (isLastEquals(input, "+-*/%.(") || count(input, ")") >= count(input,"(")) {
+                return;
+            }
         }
 
         inputView.setText(input + str);
+    }
+
+    private boolean checkSyntaxWith(String inputToCheck) {
+
+        try {
+            calculator.calculate(inputToCheck);
+            return true;
+        } catch (CalculatorSyntaxException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean isLastNumberWell() {
+        String input = inputView.getText().toString();
+
+        String num = "";
+
+        while (isLastEquals(input, "0123456789.")) {
+            num = input.charAt(input.length() - 1) + num;
+            input = input.substring(0, input.length() - 1);
+        }
+
+        return count(num, ".") < 1;
+    }
+
+    private int count(String stringToCheck, String symbol) {
+        return stringToCheck.length() - stringToCheck.replaceAll(String.format("\\%s", symbol),"").length();
     }
 }

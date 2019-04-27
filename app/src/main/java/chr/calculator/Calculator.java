@@ -205,6 +205,12 @@ public class Calculator {
         if ("()".contains(String.valueOf(source.charAt(0)))) {
             String operator = String.valueOf(source.charAt(0));
             popElement();
+
+            // Check if it was a last character (Last character is an bracket = Bad syntax)
+            if (source.length() == 0 && operator.equals("(")) {
+                throw new CalculatorSyntaxException(CalculatorSyntaxException.BAD_SYNTAX);
+            }
+
             return new Lexem(operator, Lexem.BRACKET);
         }
 
