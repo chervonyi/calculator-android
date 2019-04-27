@@ -1,9 +1,11 @@
 package chr.calculator;
 
 import android.content.res.Resources;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -24,6 +26,32 @@ public class CalculatorActivity extends AppCompatActivity {
 
     private Calculator calculator = new Calculator();
     private DecimalFormat decimalFormat = new DecimalFormat("#.###");
+
+    private final int TIME_TO_ERASE_ONE_SYMBOL = 250;
+    private final int MIN_TIME_TO_ERASE_ONE_SYMBOL = 100;
+    private final int STEP_TIME = 20;
+    private int currentTimeToErase;
+
+    private final Handler handler = new Handler();
+    private Runnable mErasePress = new Runnable() {
+
+        public void run() {
+
+            eraseOneSymbol();
+
+            // If erase is still pressed - go on
+            if (eraseIsPressed) {
+
+                if (currentTimeToErase > MIN_TIME_TO_ERASE_ONE_SYMBOL) {
+                    currentTimeToErase -= STEP_TIME;
+                }
+
+                handler.postDelayed(mErasePress, currentTimeToErase);
+            }
+        }
+    };
+
+    private boolean eraseIsPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +139,23 @@ public class CalculatorActivity extends AppCompatActivity {
             });
         }
 
+        findViewById(R.id.button_erase).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    eraseIsPressed = true;
+                    currentTimeToErase = TIME_TO_ERASE_ONE_SYMBOL;
+                    handler.postDelayed(mErasePress, currentTimeToErase);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    eraseIsPressed = false;
+                }
+
+
+                return true;
+            }
+        });
+
     }
 
     private boolean setMemory(View view) {
@@ -135,8 +180,7 @@ public class CalculatorActivity extends AppCompatActivity {
         preCalculation();
     }
 
-    public void onClickErase(View view) {
-
+    private void eraseOneSymbol() {
         String input = inputView.getText().toString();
 
         if (input.length() > 0) {

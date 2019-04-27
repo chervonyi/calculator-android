@@ -335,8 +335,7 @@
                                android:background="@drawable/button_numbers"
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
-                               android:text="С"
-                               android:onClick="onClickErase"
+                               android:text="C"
                                style="?android:attr/borderlessButtonStyle"/>
                        </LinearLayout>
 
