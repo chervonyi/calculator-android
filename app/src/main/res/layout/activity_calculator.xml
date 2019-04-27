@@ -126,6 +126,7 @@
                        android:textColor="@color/colorAccentCyan"
                        android:background="@drawable/button_brackets"
                        android:text="("
+                       android:onClick="onClickOperatingButton"
                        tools:ignore="RtlHardcoded" />
 
                    <Button
@@ -138,6 +139,7 @@
                        android:textColor="@color/colorAccentCyan"
                        android:background="@drawable/button_brackets"
                        android:text=")"
+                       android:onClick="onClickOperatingButton"
                        tools:ignore="RtlHardcoded"/>
 
                </LinearLayout>
@@ -175,6 +177,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="7"
+                               android:onClick="onClickNumber"
                                style="?android:attr/borderlessButtonStyle"/>
 
                            <Button
@@ -186,6 +189,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="8"
+                               android:onClick="onClickNumber"
                                style="?android:attr/borderlessButtonStyle"/>
 
                            <Button
@@ -197,6 +201,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="9"
+                               android:onClick="onClickNumber"
                                style="?android:attr/borderlessButtonStyle"/>
                        </LinearLayout>
 
@@ -216,6 +221,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="4"
+                               android:onClick="onClickNumber"
                                style="?android:attr/borderlessButtonStyle"/>
 
                            <Button
@@ -227,6 +233,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="5"
+                               android:onClick="onClickNumber"
                                style="?android:attr/borderlessButtonStyle"/>
 
                            <Button
@@ -238,6 +245,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="6"
+                               android:onClick="onClickNumber"
                                style="?android:attr/borderlessButtonStyle"/>
                        </LinearLayout>
 
@@ -257,6 +265,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="1"
+                               android:onClick="onClickNumber"
                                style="?android:attr/borderlessButtonStyle"/>
 
                            <Button
@@ -268,6 +277,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="2"
+                               android:onClick="onClickNumber"
                                style="?android:attr/borderlessButtonStyle"/>
 
                            <Button
@@ -279,6 +289,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="3"
+                               android:onClick="onClickNumber"
                                style="?android:attr/borderlessButtonStyle"/>
                        </LinearLayout>
 
@@ -298,6 +309,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="."
+                               android:onClick="onClickOperatingButton"
                                style="?android:attr/borderlessButtonStyle"/>
 
                            <Button
@@ -309,6 +321,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="0"
+                               android:onClick="onClickNumber"
                                style="?android:attr/borderlessButtonStyle"/>
 
                            <Button
@@ -320,6 +333,7 @@
                                android:textColor="@color/numbers"
                                android:textSize="25sp"
                                android:text="С"
+                               android:onClick="onClickErase"
                                style="?android:attr/borderlessButtonStyle"/>
                        </LinearLayout>
 
@@ -346,7 +360,6 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center"
                                 android:orientation="vertical">
 
                                 <Button
@@ -357,7 +370,8 @@
                                     android:layout_margin="8dp"
                                     android:textColor="@color/darkBackground"
                                     android:background="@drawable/button_operation_cyan"
-                                    android:text="%"/>
+                                    android:text="%"
+                                    android:onClick="onClickOperatingButton"/>
 
                                 <Button
                                     android:id="@+id/button_plus"
@@ -367,7 +381,8 @@
                                     android:layout_margin="8dp"
                                     android:textColor="@color/darkBackground"
                                     android:background="@drawable/button_operation_cyan"
-                                    android:text="+"/>
+                                    android:text="+"
+                                    android:onClick="onClickOperatingButton"/>
                             </LinearLayout>
 
                             <!-- RIGHT COLUMN -->
@@ -386,7 +401,8 @@
                                     android:layout_margin="8dp"
                                     android:textColor="@color/darkBackground"
                                     android:background="@drawable/button_operation_cyan"
-                                    android:text="x"/>
+                                    android:text="x"
+                                    android:onClick="onClickOperatingButton"/>
 
                                 <Button
                                     android:id="@+id/button_division"
@@ -396,7 +412,8 @@
                                     android:layout_margin="8dp"
                                     android:textColor="@color/darkBackground"
                                     android:background="@drawable/button_operation_cyan"
-                                    android:text="/"/>
+                                    android:text="/"
+                                    android:onClick="onClickOperatingButton"/>
 
                                 <Button
                                     android:id="@+id/button_subtraction"
@@ -406,7 +423,8 @@
                                     android:layout_margin="8dp"
                                     android:textColor="@color/darkBackground"
                                     android:background="@drawable/button_operation_cyan"
-                                    android:text="-"/>
+                                    android:text="-"
+                                    android:onClick="onClickOperatingButton"/>
                             </LinearLayout>
 
                         </LinearLayout>
@@ -420,7 +438,8 @@
                            android:textSize="25sp"
                            android:textColor="@color/darkBackground"
                            android:background="@drawable/button_operation_yellow"
-                           android:text="="/>
+                           android:text="="
+                           android:onClick="onClickOperatingButton"/>
                    </LinearLayout>
 
                </LinearLayout>
