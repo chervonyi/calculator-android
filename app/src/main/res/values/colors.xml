@@ -9,9 +9,4 @@
     <color name="lightGray">#C5C3C3</color>
     <color name="fontMemory">#625E5E</color>
     <color name="numbers">#FFF</color>
-
-    <!-- OTHERS -->
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
 </resources>
