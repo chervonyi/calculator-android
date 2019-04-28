@@ -154,7 +154,6 @@ public class CalculatorActivity extends AppCompatActivity {
                     eraseIsPressed = false;
                 }
 
-
                 return true;
             }
         });
