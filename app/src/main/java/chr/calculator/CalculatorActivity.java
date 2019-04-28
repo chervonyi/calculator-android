@@ -27,20 +27,22 @@ public class CalculatorActivity extends AppCompatActivity {
     private Calculator calculator = new Calculator();
     private DecimalFormat decimalFormat = new DecimalFormat("#.###");
 
-    private final int TIME_TO_ERASE_ONE_SYMBOL = 250;
+    private final int TIME_TO_ERASE_ONE_SYMBOL = 500;
     private final int MIN_TIME_TO_ERASE_ONE_SYMBOL = 100;
-    private final int STEP_TIME = 20;
+    private final int STEP_TIME = 70;
     private int currentTimeToErase;
+
+    private final int MAX_SYMBOLS = 30;
 
     private final Handler handler = new Handler();
     private Runnable mErasePress = new Runnable() {
 
         public void run() {
 
-            eraseOneSymbol();
-
             // If erase is still pressed - go on
             if (eraseIsPressed) {
+
+                eraseOneSymbol();
 
                 if (currentTimeToErase > MIN_TIME_TO_ERASE_ONE_SYMBOL) {
                     currentTimeToErase -= STEP_TIME;
@@ -148,6 +150,7 @@ public class CalculatorActivity extends AppCompatActivity {
                     currentTimeToErase = TIME_TO_ERASE_ONE_SYMBOL;
                     handler.postDelayed(mErasePress, currentTimeToErase);
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    eraseOneSymbol();
                     eraseIsPressed = false;
                 }
 
@@ -202,8 +205,14 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     public void onClickCalculate(View view) {
+        String input = inputView.getText().toString();
+
+        if (input.length() == 0) {
+            return;
+        }
+
         try {
-            double result = calculator.calculate(convertString(inputView.getText().toString()));
+            double result = calculator.calculate(convertString(input));
             inputView.setText(decimalFormat.format(result));
             resultView.setText("");
         } catch (CalculatorSyntaxException e) {
@@ -241,6 +250,10 @@ public class CalculatorActivity extends AppCompatActivity {
 
         String input = inputView.getText().toString();
 
+        if (input.length() >= MAX_SYMBOLS) {
+            return;
+        }
+
         if (input.length() == 0) {
             // One of these character cannot be the first one in the input string
             if ("+−×÷%)".contains(str)) {
@@ -268,6 +281,12 @@ public class CalculatorActivity extends AppCompatActivity {
             }
         }
 
+        if (str.equals("0")) {
+            if (input.length() == 0 || isLastEquals(input, "+−×÷%(")) {
+                str += ".";
+            }
+        }
+
         // Conditions for brackets
         if (str.equals("(")) {
             if (input.length() == 0) {
@@ -286,17 +305,19 @@ public class CalculatorActivity extends AppCompatActivity {
     }
 
     private boolean isLastNumberWell() {
-        String input = inputView.getText().toString();
+        return count(getLastNumber(inputView.getText().toString()), ".") < 1;
+    }
 
+    private String getLastNumber(String input) {
         String num = "";
 
         while (isLastEquals(input, "0123456789.")) {
             num = input.charAt(input.length() - 1) + num;
             input = input.substring(0, input.length() - 1);
         }
-
-        return count(num, ".") < 1;
+        return num;
     }
+
 
     private int count(String stringToCheck, String symbol) {
         return stringToCheck.length() - stringToCheck.replaceAll(String.format("\\%s", symbol),"").length();

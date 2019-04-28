@@ -7,7 +7,7 @@
         <item name="android:windowFullscreen">true</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/darkBackground</item>
-        <item name="colorPrimary">@color/colorAccentCyan</item>
+        <item name="colorPrimary">@color/dark</item>
         <item name="colorPrimaryDark">@color/darkBackground</item>
         <item name="colorAccent">@color/colorAccentYellow</item>
     </style>

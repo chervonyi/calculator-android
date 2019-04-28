@@ -3,10 +3,11 @@
 
     <!-- MAIN -->
     <color name="darkBackground">#414145</color>
+    <color name="dark">#313135</color>
     <color name="colorAccentCyan">#80E6F0</color>
     <color name="colorAccentYellow">#E8FFB2</color>
     <color name="resultColor">#FFF</color>
-    <color name="lightGray">#C5C3C3</color>
+    <color name="lightGray">#979797</color>
     <color name="fontMemory">#625E5E</color>
     <color name="numbers">#FFF</color>
 </resources>

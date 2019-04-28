@@ -1,7 +1,5 @@
 package chr.calculator;
 
-import android.util.Log;
-
 public class Calculator {
 
     private final char DELIMITER = '.';
@@ -19,7 +17,6 @@ public class Calculator {
         }
 
         reset();
-
         this.source = source;
 
         level_2();
@@ -230,5 +227,4 @@ public class Calculator {
         num = -1;
         operator = new Lexem();
     }
-
 }
