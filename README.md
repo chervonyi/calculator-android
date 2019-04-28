@@ -2,16 +2,6 @@
 
 #### Implemented all of the ideas of this application and then published on the [Google Play.](https://play.google.com/store/apps/details?id=chr.calculator&hl=en)
 
-
-* Added view of main activity.
-* Connected all UI views.
-* Implemented calculator logic.
-* Implemented memory slots (on the top of the screen).
-* Added conditions for input label.
-* Fixed minor bugs.
-* Published on Google Play.
-
-
 **Description:** _(from Google Play)_
 > A free calculator with simple design, percentage features and smart memory keys.
 >
@@ -25,4 +15,6 @@
 <img src="https://i.imgur.com/SMGCNMB.png" width="200"/> <img src="https://i.imgur.com/2ifYQEZ.png" width="200"/> 
 <img src="https://i.imgur.com/b2kHuUj.png" width="200"/> <img src="https://i.imgur.com/b1OHBnl.png" width="200"/>
 
-#### Designed by [Juan Fer](https://dribbble.com/juanfer)
+#### [Change Log](https://github.com/chervonyi/calculator-android/releases)
+
+#### Designer: [Juan Fer](https://dribbble.com/juanfer)
